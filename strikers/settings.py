@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 from .key import Secret
 
+import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,14 +23,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = Secret.SECRET_KEY
+# SECRET_KEY = Secret.SECRET_KEY
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
-STRIPE_SECRET_KEY = Secret.STRIPE_SECRET_KEY
+# STRIPE_SECRET_KEY = Secret.STRIPE_SECRET_KEY
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
 
 # Application definition
 
@@ -94,6 +98,18 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#         'default': {
+#             'ENGINE': 'djongo',
+#             'NAME': 'strikers',
+#             'ENFORCE_SCHEMA': False,
+#             'CLIENT': {
+#                 # 'host': 'mongodb+srv://quatre:1234@cluster0.hkcfo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+#                 'host': 'mongodb+srv://dbAdmin:6o3J8qJ5v3vVUjH0@cluster0.xbwtb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+#             }
+#         }
+# }
 
 
 # Password validation
